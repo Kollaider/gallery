@@ -14,6 +14,19 @@
             <p>{{ card.description }}</p>
         </div>
     </div>
+    <p>There are {{ comments|length}} comments</p>
+    {% if comments %}
+    <h2>Comments</h2>
+    {% for comment in comments %}
+    <div>
+        <h4>{{ comment.user }}</h4>
+        {{ comment.text }} {{ comment.date }}
+
+    </div>
+    {% endfor %}
+    {% else %}
+    <h2>No comments yet, be first...</h2>
+    {% endif %}
 </div>
 
 {% endblock %}

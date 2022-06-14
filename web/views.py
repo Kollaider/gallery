@@ -1,6 +1,6 @@
 from django.shortcuts import render
 
-from web.models import Card
+from web.models import Card, Comment
 
 
 def index(request):
@@ -11,8 +11,9 @@ def index(request):
 
 def detail(request, pk):
     card = Card.objects.get(id=pk)
-
-    context = {'card': card}
+    comments = Comment.objects.filter(card_id=pk)
+    print(comments.query)
+    context = {'card': card, 'comments': comments}
     return render(request, 'detail.html', context=context)
 
 def about(request):
