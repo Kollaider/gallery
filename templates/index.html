@@ -1,10 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base.html' %}
+{% load static %}
 
-</body>
-</html>
+{% block content %}
+<ul class="list-unstyled">
+
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+    {% for card in cards %}
+    <div class="col">
+      <div class="card" style="width: 18rem;">
+        <img src="{{ card.image.url }}" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">{{ card.title}}</h5>
+          <p class="card-text">{{ card.description|truncatechars:20 }}</p>
+          {% if card.pk|divisibleby:"2" %}
+          <a href="{% url 'web:detail' card.pk %}" class="btn btn-primary">Перейти..</a>
+          {% else %}
+          <a href="{% url 'web:detail' card.pk %}" class="btn btn-warning">Перейти..</a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+</ul>
+{% endblock %}

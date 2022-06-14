@@ -1,10 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base.html' %}
+{% load static %}
 
-</body>
-</html>
+
+{% block content %}
+<div class="container-fluid mt-3">
+    <div class="row">
+        {% if card.image %}
+        <div class="col-md-auto"><img src="{{ card.image.url }}"
+        class="main-image"></div>
+        {% endif %}
+        <div class="col">
+            <h2>{{ card.title }}</h2>
+            <p>{{ card.description }}</p>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
