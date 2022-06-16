@@ -29,4 +29,10 @@
     {% endif %}
 </div>
 
+<form action="{% url 'web:comment' card.pk %}" method="post">
+{% csrf_token %}
+    <label for="comment">Add comment: </label>
+    <input id="comment" type="text" name="comment" value="{{ form.comment }}" >
+    <input type="submit" value="Send">
+</form>
 {% endblock %}
