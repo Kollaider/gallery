@@ -1,3 +1,5 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.views import LoginView, LogoutView
 from django.shortcuts import render, redirect
 from django.urls import reverse
 
@@ -7,7 +9,8 @@ from web.models import Card, Comment
 def index(request):
     cards = Card.objects.all()
 
-    return render(request, 'index.html', {'cards': cards})
+
+    return render(request, 'index.html', {'cards': cards, 'user': request.user.username})
 
 
 def detail(request, pk):
@@ -46,3 +49,11 @@ def do_comment(request, card_pk):
         form = CommentForm()
 
     return render(request, 'detail.html', {'form': form})
+
+
+
+class WebLoginView(LoginView):
+    template_name = 'login.html'
+
+class WebLogoutView(LogoutView):
+    template_name = 'logout.html'
